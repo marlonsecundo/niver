@@ -127,10 +127,32 @@
 
   object-fit: contain;
   z-index: 1;
+  user-select: none;
+}
+
+.start {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+
+  background-color: black;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.startButton {
+  font-size: 2rem;
+
+  border: none;
+
+  background-color: transparent;
 }
 
 .cakedayImage {
   width: 32rem;
+  user-select: none;
 
   transform: rotate(180deg);
 
@@ -166,6 +188,32 @@
 
   position: absolute;
   bottom: 0;
+}
+
+.codeContent {
+  position: absolute;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.8);
+
+  flex-direction: column;
+}
+
+.amemImage {
+  width: 10%;
+  object-fit: contain;
+
+  user-select: none;
+}
+
+.amemText {
+  color: white;
+  font-size: 2rem;
 }
 
 /* BACKGROUND EFFECT */

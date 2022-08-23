@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cursor from "./images/cursor.png";
 import confetti from "canvas-confetti";
+import startImage from "./images/start.png";
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -50,7 +51,7 @@ function Mouse({ happyVisible }) {
         top: pos.y - 35,
         pointerEvents: "none",
       }}
-      src={cursor}
+      src={happyVisible ? cursor : startImage}
     ></img>
   );
 }

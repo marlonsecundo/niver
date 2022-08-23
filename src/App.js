@@ -3,7 +3,7 @@ import "./App.css";
 import "./animations.css";
 
 import backImg from "./images/background.png";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import mrLogo from "./images/mrrobot-logo.png";
 
@@ -15,10 +15,34 @@ import cakeday from "./images/cakeday.png";
 
 import Mouse from "./mouse";
 
-function App() {
-  const [keys, setKeys] = useState(new Array(10).fill(""));
+import amem from "./images/amem.png";
 
+import ReactAudioPlayer from "react-audio-player";
+
+import robotAudio from "./ost/main.mp3";
+import holyAudio from "./ost/holy.mp3";
+import clapAudio from "./ost/claps.mp3";
+
+import useAudio from "./hooks/useAudio";
+
+import startImage from "./images/start.png";
+
+const code = ["w", "w", "s", "s", "a", "d", "a", "d", "b", "a"];
+
+const errors = ["kkkk", "não consegue né", "incrivel", "pq choras julia?"];
+
+function App() {
+  const keys = useRef(new Array(10).fill(""));
+  const [viewKeys, setViewKeys] = useState(new Array(10).fill(""));
   const [homeVisible, setHomeVisible] = useState(false);
+  const [codeUnlocked, setCodeUnlocked] = useState(false);
+  const [started, setStart] = useState(false);
+
+  const [playingMR, toggleMR] = useAudio({ url: robotAudio, loop: true });
+  const [playingClaps, toggleClaps] = useAudio({ url: clapAudio, loop: false });
+  const [, toggleHoly] = useAudio({ url: holyAudio, loop: true });
+
+  const rap = useRef();
 
   const index = useRef(0);
 
@@ -30,6 +54,8 @@ function App() {
     const nMonth = Number(m);
 
     if (nDay === 9 && nMonth === 5) {
+      toggleMR();
+      toggleClaps();
       setHomeVisible(true);
       startFireworks();
     }
@@ -68,30 +94,84 @@ function App() {
     }, 250);
   };
 
-  useEffect(() => {}, []);
+  const updateViewKeys = () => {
+    setViewKeys([...keys.current]);
+  };
+
+  useEffect(() => {
+    if (codeUnlocked) {
+      toggleHoly();
+      var duration = 15 * 10000000;
+      var animationEnd = Date.now() + duration;
+      var skew = 1;
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      (function frame() {
+        var timeLeft = animationEnd - Date.now();
+        var ticks = Math.max(200, 500 * (timeLeft / duration));
+        skew = Math.max(0.8, skew - 0.001);
+
+        confetti({
+          particleCount: 1,
+          startVelocity: 0,
+          ticks: ticks,
+          origin: {
+            x: Math.random(),
+            // since particles fall down, skew start toward the top
+            y: Math.random() * skew - 0.2,
+          },
+          colors: ["#ffffff"],
+          shapes: ["circle"],
+          gravity: randomInRange(0.4, 0.6),
+          scalar: randomInRange(0.4, 1),
+          drift: randomInRange(-0.4, 0.4),
+        });
+
+        if (timeLeft > 0) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  }, [codeUnlocked]);
 
   useEffect(() => {
     if (homeVisible) {
-      console.log("fsf");
-      window.addEventListener("keydown", (ev) => {
-        if (index.current >= keys.length) {
+      const handleKeyDown = (ev) => {
+        if (ev.key === "Backspace") {
           index.current = 0;
+          keys.current = new Array(10).fill("");
+          updateViewKeys();
+          return;
         }
-        keys[index.current] = ev.key;
 
-        setKeys(keys.map((v) => v));
+        if (ev)
+          if (index.current >= keys.current.length) {
+            index.current = 0;
+          }
+
+        keys.current[index.current] = ev.key;
+
+        updateViewKeys();
+
+        const result = keys.current.every((v, i) => v == code[i]);
+
+        if (result) {
+          setCodeUnlocked(true);
+        }
 
         index.current += 1;
-      });
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     }
   }, [homeVisible]);
-
-  useEffect(() => {
-    console.log(keys);
-    if (keys === ["w", "w", "s", "s", "a", "d", "a", "d", "b", "a"]) {
-      console.log("foi");
-    }
-  }, [keys]);
 
   const squares = new Array(10).fill("").map((v, i) => {
     return (
@@ -106,6 +186,19 @@ function App() {
 
   return (
     <div className="App">
+      {!started && (
+        <section className="start">
+          <button
+            className="startButton"
+            onClick={() => {
+              toggleMR();
+              setStart(true);
+            }}
+          >
+            <img src={startImage}></img>
+          </button>
+        </section>
+      )}
       <div className="area">
         <ul className="circles">{squares}</ul>
       </div>
@@ -115,7 +208,7 @@ function App() {
         <section className="lockscreen">
           <p className="areaText">AREA PROTEGIDA...</p>
           <div className="content">
-            <img src={mrLogo}></img>
+            <img draggable={false} src={mrLogo}></img>
             <h2 className="digiteText">
               <span style={{ "--i": 1 }}>D</span>
               <span style={{ "--i": 2 }}>A</span>
@@ -179,36 +272,53 @@ function App() {
             <h1 className="happyMsg">
               Parabeeens
               <br></br>
-              Juliaaaa
+              Juliaaaa!!
             </h1>
             <p className="happyText">
-              Ahhhhhhh, my frieeeendd parabenssss kkkkkk, venho por este site
+              🎉🎉🎉
+              <br></br>
+              <br></br>
+              Ahhhhhhh, my frieeeendd parabenssss 🥳 kkkkkk, venho por este site
               trazer de maneira bem formal meu parabpens e felicidades por esta
               incrivel pessoa que tu es. Pq fazer esse site todo e dedicar meu
-              tempo pra comemorar? pq sim e pq eu quis, eh isso.
+              tempo pra comemorar? pq sim e pq eu quis, eh isso <br></br>
+              <br></br>
+              🎉🎉🎉
+              <br></br>
               <br></br>
               <br></br>
               (Se achou que eu ia elogiar, haha)
               <br></br>
               <br></br>
+              <br></br>
               Feliz niver, eu quero bolo, e vc ja ta me devendo o groot....
               (vale lembrar)
-              <br></br>
-              S2
-              <br></br>
-              <br></br>
-              <br></br>
-              Ahhh tem um cod no site, vamos ver se vc descobre, e não são os
-              confetes do mouse... (DICA: codigo universal dos jogos)
+              <br></br>❤<br></br>
             </p>
 
             <p className="bottomText">
-              Ahhh e como levou um tempo pra fazer, quero um PIX de 10 reais.
+              Ahhh tem um cod no site, vamos ver se vc descobre, e não são os
+              confetes do mouse... (DICA: codigo universal dos jogos)
+              <br></br>
+              <p>
+                {viewKeys.map((v, i) => {
+                  if (v === "") return <span key={i}>_ </span>;
+
+                  return <span key={i}>{v} </span>;
+                })}
+              </p>
             </p>
           </div>
 
-          <img className="elliotImage" src={elliot}></img>
-          <img className="cakedayImage" src={cakeday}></img>
+          <img draggable={false} className="elliotImage" src={elliot}></img>
+          <img draggable={false} className="cakedayImage" src={cakeday}></img>
+        </section>
+      )}
+
+      {codeUnlocked && (
+        <section className="codeContent">
+          <img draggable={false} className="amemImage" src={amem}></img>
+          <p className="amemText">kkkk</p>
         </section>
       )}
     </div>
