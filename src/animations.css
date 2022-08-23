@@ -1,0 +1,80 @@
+@keyframes fadeInFromNone {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes showText {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes showBottomText {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes cakeAnim {
+  from {
+    top: -250px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+.cakedayImage {
+  animation: cakeAnim 15s;
+}
+
+.areaText {
+  animation: fadeInFromNone 2s ease-out infinite;
+}
+
+.happyText {
+  animation: showText 7s;
+}
+
+.bottomText {
+  animation: showBottomText 15s;
+}
+
+.digiteText span {
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  color: #fff;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+
+  animation-delay: calc(0.2s * var(--i));
+}
