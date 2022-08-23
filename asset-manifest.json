@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1baabbc3.css",
+    "main.js": "/static/js/main.3b012141.js",
+    "static/js/787.e255ad35.chunk.js": "/static/js/787.e255ad35.chunk.js",
+    "static/media/main.mp3": "/static/media/main.ba1afd600fd20df10ea9.mp3",
+    "static/media/holy.mp3": "/static/media/holy.e0a4bc9efe416222f87c.mp3",
+    "static/media/background.png": "/static/media/background.eda0e14fbcde8490098f.png",
+    "static/media/cakeday.png": "/static/media/cakeday.2eed2f1e06ceb0b6d5b5.png",
+    "static/media/amem.png": "/static/media/amem.30e1b0155e8f156529b9.png",
+    "static/media/claps.mp3": "/static/media/claps.6018f0c7e4a925236d92.mp3",
+    "static/media/cursor.png": "/static/media/cursor.656cfcced289e47be005.png",
+    "static/media/elliot.png": "/static/media/elliot.98991792c18e19f9174b.png",
+    "static/media/start.png": "/static/media/start.2ed5ec80a81c1d9e61f0.png",
+    "static/media/mrrobot-logo.png": "/static/media/mrrobot-logo.7614cb06f6f5c1deaf81.png",
+    "static/media/mrrobot.ttf": "/static/media/mrrobot.7607cd72a56cae604093.ttf",
+    "static/media/alterebro.woff2": "/static/media/alterebro.bed4ff4ba05060c3be6d.woff2",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.1baabbc3.css.map": "/static/css/main.1baabbc3.css.map",
+    "main.3b012141.js.map": "/static/js/main.3b012141.js.map",
+    "787.e255ad35.chunk.js.map": "/static/js/787.e255ad35.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1baabbc3.css",
+    "static/js/main.3b012141.js"
+  ]
+}
