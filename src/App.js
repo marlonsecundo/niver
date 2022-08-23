@@ -29,7 +29,7 @@ import startImage from "./images/start.png";
 
 const code = ["w", "w", "s", "s", "a", "d", "a", "d", "b", "a"];
 
-const errors = ["kkkk", "não consegue né", "incrivel", "pq choras julia?"];
+const errorList = ["kkkk", "não consegue né", "incrivel", "pq choras julia?"];
 
 function App() {
   const keys = useRef(new Array(10).fill(""));
@@ -42,6 +42,8 @@ function App() {
   const [playingClaps, toggleClaps] = useAudio({ url: clapAudio, loop: false });
   const [, toggleHoly] = useAudio({ url: holyAudio, loop: true });
 
+  const [error, setError] = useState();
+
   const rap = useRef();
 
   const index = useRef(0);
@@ -50,14 +52,20 @@ function App() {
   const [month, setMonth] = useState("");
 
   const handleConfirm = (d, m) => {
-    const nDay = Number(d);
-    const nMonth = Number(m);
+    try {
+      const nDay = Number(d);
+      const nMonth = Number(m);
 
-    if (nDay === 9 && nMonth === 5) {
-      toggleMR();
-      toggleClaps();
-      setHomeVisible(true);
-      startFireworks();
+      if (nDay === 9 && nMonth === 5) {
+        toggleMR();
+        toggleClaps();
+        setHomeVisible(true);
+        startFireworks();
+
+        return;
+      }
+    } finally {
+      setError(errorList[Math.floor(Math.random() * errorList.length)]);
     }
   };
 
@@ -208,7 +216,9 @@ function App() {
         <section className="lockscreen">
           <p className="areaText">AREA PROTEGIDA...</p>
           <div className="content">
+            <p className="errorText">{error && `ERROR: ${error}`}</p>
             <img draggable={false} src={mrLogo}></img>
+
             <h2 className="digiteText">
               <span style={{ "--i": 1 }}>D</span>
               <span style={{ "--i": 2 }}>A</span>

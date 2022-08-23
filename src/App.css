@@ -142,6 +142,11 @@
   align-items: center;
 }
 
+.errorText {
+  color: red;
+  font-size: 2rem;
+}
+
 .startButton {
   font-size: 2rem;
 
