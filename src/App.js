@@ -308,7 +308,7 @@ function App() {
 
             <p className="bottomText">
               Ahhh tem um cod no site, vamos ver se vc descobre, e não são os
-              confetes do mouse... (DICA: codigo universal dos jogos)
+              confetes do mouse... (DICA: codigo famoso dos jogos)
               <br></br>
               <p>
                 {viewKeys.map((v, i) => {
