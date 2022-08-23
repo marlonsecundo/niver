@@ -303,7 +303,7 @@ function App() {
               <br></br>
               Feliz niver, eu quero bolo, e vc ja ta me devendo o groot....
               (vale lembrar)
-              <br></br>❤<br></br>
+              <br></br>❤️<br></br>
             </p>
 
             <p className="bottomText">
