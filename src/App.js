@@ -28,6 +28,8 @@ import officeAudio from "./ost/office.mp3";
 import useAudio from "./hooks/useAudio";
 
 import startImage from "./images/start.png";
+import useIsMobile from "./hooks/useIsMobile";
+import { useDeviceSelectors } from "react-device-detect";
 
 const code = ["w", "w", "s", "s", "a", "d", "a", "d", "b", "a"];
 
@@ -39,6 +41,9 @@ function App() {
   const [homeVisible, setHomeVisible] = useState(false);
   const [codeUnlocked, setCodeUnlocked] = useState(false);
   const [started, setStart] = useState(false);
+  const isMobile = useIsMobile();
+  const [selectors, data] = useDeviceSelectors(window.navigator.userAgent);
+  const { isDesktop } = selectors;
 
   const [playingMR, toggleMR] = useAudio({ url: robotAudio, loop: true });
   const [playingClaps, toggleClaps] = useAudio({ url: clapAudio, loop: false });
@@ -197,6 +202,20 @@ function App() {
       ></li>
     );
   });
+
+  console.log({ isDesktop });
+
+  if (isMobile || !isDesktop) {
+    return (
+      <div className="App">
+        <section className="isMobile">
+          <h1 className="mobileText">
+            O SITE SÓ FUNCIONA NUM NAVEGADOR DE PC/NOTEBOOK
+          </h1>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
