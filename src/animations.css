@@ -52,6 +52,33 @@
   }
 }
 
+@keyframes officeAnim {
+  from {
+    right: -250px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes darleneAnim {
+  from {
+    left: -250px;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes elliotAnim {
+  from {
+    bottom: -250px;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
 .cakedayImage {
   animation: cakeAnim 15s;
 }
@@ -77,4 +104,16 @@
   animation: flip 2s infinite;
 
   animation-delay: calc(0.2s * var(--i));
+}
+
+.darleneImage {
+  animation: darleneAnim 10s;
+}
+
+.office2Image {
+  animation: officeAnim 10s;
+}
+
+.elliotImage {
+  animation: elliotAnim 20s;
 }

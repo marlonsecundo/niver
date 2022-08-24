@@ -10,8 +10,9 @@ import mrLogo from "./images/mrrobot-logo.png";
 import confetti from "canvas-confetti";
 
 import elliot from "./images/elliot.png";
-
 import cakeday from "./images/cakeday.png";
+import darlene from "./images/darlene.png";
+import office2 from "./images/office2.png";
 
 import Mouse from "./mouse";
 
@@ -22,6 +23,7 @@ import ReactAudioPlayer from "react-audio-player";
 import robotAudio from "./ost/main.mp3";
 import holyAudio from "./ost/holy.mp3";
 import clapAudio from "./ost/claps.mp3";
+import officeAudio from "./ost/office.mp3";
 
 import useAudio from "./hooks/useAudio";
 
@@ -41,6 +43,7 @@ function App() {
   const [playingMR, toggleMR] = useAudio({ url: robotAudio, loop: true });
   const [playingClaps, toggleClaps] = useAudio({ url: clapAudio, loop: false });
   const [, toggleHoly] = useAudio({ url: holyAudio, loop: true });
+  const [, toggleOffice] = useAudio({ url: officeAudio, loop: true });
 
   const [error, setError] = useState();
 
@@ -59,6 +62,7 @@ function App() {
       if (nDay === 9 && nMonth === 5) {
         toggleMR();
         toggleClaps();
+        toggleOffice();
         setHomeVisible(true);
         startFireworks();
 
@@ -70,7 +74,7 @@ function App() {
   };
 
   const startFireworks = () => {
-    var duration = 15 * 1000;
+    var duration = 60 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -109,6 +113,8 @@ function App() {
   useEffect(() => {
     if (codeUnlocked) {
       toggleHoly();
+      toggleOffice();
+
       var duration = 15 * 10000000;
       var animationEnd = Date.now() + duration;
       var skew = 1;
@@ -302,13 +308,13 @@ function App() {
               <br></br>
               <br></br>
               Feliz niver, eu quero bolo, e vc ja ta me devendo o groot....
-              (vale lembrar)
-              <br></br>❤️<br></br>
+              (vale lembrar) ❤️<br></br>
             </p>
 
             <p className="bottomText">
               Ahhh tem um cod no site, vamos ver se vc descobre, e não são os
-              confetes do mouse... (DICA: codigo famoso dos jogos)
+              confetes do mouse, e nem o the office... (DICA: codigo famoso dos
+              jogos)
               <br></br>
               <p>
                 {viewKeys.map((v, i) => {
@@ -320,8 +326,23 @@ function App() {
             </p>
           </div>
 
-          <img draggable={false} className="elliotImage" src={elliot}></img>
-          <img draggable={false} className="cakedayImage" src={cakeday}></img>
+          <a target={"_blank"} href="https://youtu.be/1LyZvcUAU0E">
+            <img draggable={false} className="elliotImage" src={elliot}></img>
+          </a>
+
+          <a
+            target={"_blank"}
+            href="https://www.youtube.com/watch?v=xb2fjZa_L74&ab_channel=FlashbackFM_%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F"
+          >
+            <img draggable={false} className="cakedayImage" src={cakeday}></img>
+          </a>
+          <img draggable={false} className="darleneImage" src={darlene}></img>
+          <a
+            target={"_blank"}
+            href="https://www.youtube.com/watch?v=o-YBDTqX_ZU&ab_channel=MusRest"
+          >
+            <img draggable={false} className="office2Image" src={office2}></img>
+          </a>
         </section>
       )}
 
