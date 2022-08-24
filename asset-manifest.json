@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/niver/static/css/main.db394cbb.css",
-    "main.js": "/niver/static/js/main.87dddbb4.js",
+    "main.css": "/niver/static/css/main.25b2b559.css",
+    "main.js": "/niver/static/js/main.23caf282.js",
     "static/js/787.e255ad35.chunk.js": "/niver/static/js/787.e255ad35.chunk.js",
     "static/media/main.mp3": "/niver/static/media/main.ba1afd600fd20df10ea9.mp3",
     "static/media/office.mp3": "/niver/static/media/office.242ee6fb0928bf588c8a.mp3",
@@ -20,12 +20,12 @@
     "static/media/alterebro.woff2": "/niver/static/media/alterebro.bed4ff4ba05060c3be6d.woff2",
     "static/media/logo.svg": "/niver/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/niver/index.html",
-    "main.db394cbb.css.map": "/niver/static/css/main.db394cbb.css.map",
-    "main.87dddbb4.js.map": "/niver/static/js/main.87dddbb4.js.map",
+    "main.25b2b559.css.map": "/niver/static/css/main.25b2b559.css.map",
+    "main.23caf282.js.map": "/niver/static/js/main.23caf282.js.map",
     "787.e255ad35.chunk.js.map": "/niver/static/js/787.e255ad35.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.db394cbb.css",
-    "static/js/main.87dddbb4.js"
+    "static/css/main.25b2b559.css",
+    "static/js/main.23caf282.js"
   ]
 }
