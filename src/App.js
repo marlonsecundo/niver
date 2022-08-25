@@ -283,7 +283,7 @@ function App() {
           <p className="areaText">AREA PROTEGIDA...</p>
           <div className="content">
             <p className="errorText">{error && `ERROR: ${error}`}</p>
-            <img draggable={false} src={mrLogo}></img>
+            <img className="mrLogoImage" draggable={false} src={mrLogo}></img>
 
             <h2 className="digiteText">
               <span style={{ "--i": 1 }}>D</span>
@@ -437,11 +437,7 @@ function App() {
               <br></br>
               🎉🎉🎉
               <br></br>
-              <br></br>
-              <br></br>
               (Se achou que eu ia elogiar, haha)
-              <br></br>
-              <br></br>
               <br></br>
               Feliz niver, eu quero bolo, e vc ja ta me devendo o groot....
               (vale lembrar) ❤️<br></br>
