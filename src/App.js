@@ -427,12 +427,12 @@ function App() {
               Juliaaaa!!
             </h1>
             <p className="happyText">
+              🎉🎉🎉
               <br></br>
-              🎉🎉🎉 Ahhhhhhh, my frieeeendd parabenssss 🥳 kkkkkk, venho por
-              este site trazer de maneira bem formal meu parabens e felicidades
-              por esta incrivel pessoa que tu es. Pq fazer esse site todo e
-              dedicar meu tempo pra comemorar? pq sim e pq eu quis, eh isso{" "}
-              <br></br>
+              Ahhhhhhh, my frieeeendd parabenssss 🥳 kkkkkk, venho por este site
+              trazer de maneira bem formal meu parabens e felicidades por esta
+              incrivel pessoa que tu es. Pq fazer esse site todo e dedicar meu
+              tempo pra comemorar? pq sim e pq eu quis, eh isso <br></br>
               (Se achou que eu ia elogiar, haha)
               <br></br>
               Feliz niver, eu quero bolo, e vc ja ta me devendo o groot....
