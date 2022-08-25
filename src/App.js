@@ -114,12 +114,14 @@ function App() {
       confetti(
         Object.assign({}, defaults, {
           particleCount,
+          zIndex: 1,
           origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
         })
       );
       confetti(
         Object.assign({}, defaults, {
           particleCount,
+          zIndex: 1,
           origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
         })
       );
@@ -130,44 +132,49 @@ function App() {
     setViewKeys([...keys.current]);
   };
 
+  const showSnow = () => {
+    var duration = 15 * 10000000;
+    var animationEnd = Date.now() + duration;
+    var skew = 1;
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    (function frame() {
+      var timeLeft = animationEnd - Date.now();
+      var ticks = Math.max(200, 500 * (timeLeft / duration));
+      skew = Math.max(0.8, skew - 0.001);
+
+      confetti({
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: ticks,
+        origin: {
+          x: Math.random(),
+          // since particles fall down, skew start toward the top
+          y: Math.random() * skew - 0.2,
+        },
+        colors: ["#ffffff"],
+        shapes: ["circle"],
+        gravity: randomInRange(0.4, 0.6),
+        scalar: randomInRange(0.4, 1),
+        drift: randomInRange(-0.4, 0.4),
+        zIndex: 3,
+      });
+
+      if (timeLeft > 0) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  };
+
   useEffect(() => {
     if (codeUnlocked) {
       toggleHoly();
       toggleOffice();
 
-      var duration = 15 * 10000000;
-      var animationEnd = Date.now() + duration;
-      var skew = 1;
-
-      function randomInRange(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-
-      (function frame() {
-        var timeLeft = animationEnd - Date.now();
-        var ticks = Math.max(200, 500 * (timeLeft / duration));
-        skew = Math.max(0.8, skew - 0.001);
-
-        confetti({
-          particleCount: 1,
-          startVelocity: 0,
-          ticks: ticks,
-          origin: {
-            x: Math.random(),
-            // since particles fall down, skew start toward the top
-            y: Math.random() * skew - 0.2,
-          },
-          colors: ["#ffffff"],
-          shapes: ["circle"],
-          gravity: randomInRange(0.4, 0.6),
-          scalar: randomInRange(0.4, 1),
-          drift: randomInRange(-0.4, 0.4),
-        });
-
-        if (timeLeft > 0) {
-          requestAnimationFrame(frame);
-        }
-      })();
+      showSnow();
     }
   }, [codeUnlocked]);
 
@@ -385,7 +392,7 @@ function App() {
           {hackerIndex >= 6 && (
             <HackerText
               text="$ 3... 2... 1..."
-              speed={100}
+              speed={150}
               delay={1000}
               onFinished={() => setHackerIndex(hackerIndex + 1)}
             />

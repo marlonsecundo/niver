@@ -65,6 +65,7 @@
 
   justify-content: center;
   align-items: center;
+  z-index: 0;
 }
 
 .backgroundImg {
@@ -238,7 +239,6 @@
 
 .codeContent {
   position: absolute;
-  z-index: 2;
 
   width: 100%;
   height: 100%;
@@ -253,6 +253,8 @@
 .amemImage {
   width: 10%;
   object-fit: contain;
+
+  z-index: 2;
 
   user-select: none;
 }
