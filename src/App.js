@@ -55,6 +55,19 @@ function App() {
   const [, toggleOffice] = useAudio({ url: officeAudio, loop: true });
   const [, toggleHacking] = useAudio({ url: hackingAudio, loop: true });
 
+  const [squares, setSquares] = useState(
+    new Array(10).fill("").map((v, i) => {
+      return (
+        <li
+          key={i}
+          style={{
+            "--animColor": homeVisible ? "red" : "gray",
+          }}
+        ></li>
+      );
+    })
+  );
+
   const [hackerTextVisible, setHackerTextVisible] = useState(false);
 
   const [error, setError] = useState();
@@ -93,7 +106,7 @@ function App() {
     startFireworks();
   };
 
-  const startFireworks = () => {
+  const startFireworks = useCallback(() => {
     var duration = 60 * 1000;
     var animationEnd = Date.now() + duration;
     var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -126,13 +139,13 @@ function App() {
         })
       );
     }, 250);
-  };
+  }, []);
 
   const updateViewKeys = () => {
     setViewKeys([...keys.current]);
   };
 
-  const showSnow = () => {
+  const showSnow = useCallback(() => {
     var duration = 15 * 10000000;
     var animationEnd = Date.now() + duration;
     var skew = 1;
@@ -167,7 +180,7 @@ function App() {
         requestAnimationFrame(frame);
       }
     })();
-  };
+  }, []);
 
   useEffect(() => {
     if (codeUnlocked) {
@@ -179,6 +192,19 @@ function App() {
   }, [codeUnlocked]);
 
   useEffect(() => {
+    setSquares(
+      new Array(10).fill("").map((v, i) => {
+        return (
+          <li
+            key={i}
+            style={{
+              "--animColor": homeVisible ? "red" : "gray",
+            }}
+          ></li>
+        );
+      })
+    );
+
     if (homeVisible) {
       const handleKeyDown = (ev) => {
         if (ev.key === "Backspace") {
@@ -214,25 +240,7 @@ function App() {
     }
   }, [homeVisible]);
 
-  const squares = new Array(10).fill("").map((v, i) => {
-    return (
-      <li
-        key={i}
-        style={{
-          "--animColor": homeVisible ? "red" : "gray",
-        }}
-      ></li>
-    );
-  });
-
   const [hackerIndex, setHackerIndex] = useState(0);
-  const [dotVisible, setDotVisible] = useState(false);
-
-  useEffect(() => {
-    setInterval(() => {
-      setDotVisible((prev) => !prev);
-    }, 200);
-  }, []);
 
   if (isMobile || !isDesktop) {
     return (
@@ -406,7 +414,7 @@ function App() {
             />
           )}
 
-          {dotVisible && <span>|</span>}
+          <span className="hackerDot">$</span>
         </section>
       )}
 

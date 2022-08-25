@@ -117,3 +117,7 @@
 .elliotImage {
   animation: elliotAnim 20s;
 }
+
+.hackerDot {
+  animation: showText 400ms infinite;
+}
