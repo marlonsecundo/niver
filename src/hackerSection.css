@@ -1,0 +1,17 @@
+.hackerText {
+  width: 100%;
+  height: 100%;
+
+  background-color: black;
+  z-index: 1;
+
+  padding: 2rem;
+
+  flex-direction: column;
+}
+
+.hackerText span {
+  color: white;
+  font-size: 2rem;
+  line-height: 3rem;
+}

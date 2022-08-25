@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import "./animations.css";
+import "./backgroundAnim.css";
+import "./hackerSection.css";
 
 import backImg from "./images/background.png";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -24,12 +26,14 @@ import robotAudio from "./ost/main.mp3";
 import holyAudio from "./ost/holy.mp3";
 import clapAudio from "./ost/claps.mp3";
 import officeAudio from "./ost/office.mp3";
+import hackingAudio from "./ost/hacking.mp3";
 
 import useAudio from "./hooks/useAudio";
 
 import startImage from "./images/start.png";
 import useIsMobile from "./hooks/useIsMobile";
 import { useDeviceSelectors } from "react-device-detect";
+import HackerText, { hackerTextFunction } from "react-hacker-text";
 
 const code = ["w", "w", "s", "s", "a", "d", "a", "d", "b", "a"];
 
@@ -49,6 +53,9 @@ function App() {
   const [playingClaps, toggleClaps] = useAudio({ url: clapAudio, loop: false });
   const [, toggleHoly] = useAudio({ url: holyAudio, loop: true });
   const [, toggleOffice] = useAudio({ url: officeAudio, loop: true });
+  const [, toggleHacking] = useAudio({ url: hackingAudio, loop: true });
+
+  const [hackerTextVisible, setHackerTextVisible] = useState(false);
 
   const [error, setError] = useState();
 
@@ -65,17 +72,25 @@ function App() {
       const nMonth = Number(m);
 
       if (nDay === 9 && nMonth === 5) {
+        setHackerTextVisible(true);
+        toggleHacking();
         toggleMR();
-        toggleClaps();
-        toggleOffice();
-        setHomeVisible(true);
-        startFireworks();
 
         return;
       }
     } finally {
       setError(errorList[Math.floor(Math.random() * errorList.length)]);
     }
+  };
+
+  const showHappyBirthday = () => {
+    setHomeVisible(true);
+
+    toggleHacking();
+    toggleClaps();
+    toggleOffice();
+    setHomeVisible(true);
+    startFireworks();
   };
 
   const startFireworks = () => {
@@ -203,7 +218,14 @@ function App() {
     );
   });
 
-  console.log({ isDesktop });
+  const [hackerIndex, setHackerIndex] = useState(0);
+  const [dotVisible, setDotVisible] = useState(false);
+
+  useEffect(() => {
+    setInterval(() => {
+      setDotVisible((prev) => !prev);
+    }, 200);
+  }, []);
 
   if (isMobile || !isDesktop) {
     return (
@@ -230,6 +252,10 @@ function App() {
           >
             <img src={startImage}></img>
           </button>
+
+          <p className="startText">
+            AUMENTE O SOM E DEIXE EM TELA CHEIA! (F11)
+          </p>
         </section>
       )}
       <div className="area">
@@ -237,7 +263,7 @@ function App() {
       </div>
       <Mouse happyVisible={homeVisible}></Mouse>
 
-      {!homeVisible && (
+      {!hackerTextVisible && (
         <section className="lockscreen">
           <p className="areaText">AREA PROTEGIDA...</p>
           <div className="content">
@@ -298,6 +324,80 @@ function App() {
               ACESSAR
             </button>
           </div>
+        </section>
+      )}
+
+      {hackerTextVisible && !homeVisible && (
+        <section className="hackerText">
+          <HackerText
+            text="$ AUTENTICANDO REQUISIÇÃO COM O SERVIDOR BASE..."
+            speed={15}
+            onFinished={() => setHackerIndex(hackerIndex + 1)}
+          />
+
+          {hackerIndex >= 1 && (
+            <HackerText
+              text="$ ABRINDO CONEXÃO PEER TO PEER E CRIANDO AMBIENTE SEGURO..."
+              speed={15}
+              delay={1000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 2 && (
+            <HackerText
+              text="$ FAZENDO O DOWNLOAD DOS DADOS CRIPTOGRAFADOS..."
+              speed={15}
+              delay={2000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 3 && (
+            <HackerText
+              text="$ BAIXANDO O VOLUME 8 DE MR ROBOT (QUEM DERA...)"
+              speed={15}
+              delay={1000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 4 && (
+            <HackerText
+              text="$ DESCRIPTOGRAFANDO DADOS COM A DATA_CHAVE... (QUASE LÁ)"
+              speed={15}
+              delay={4000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 5 && (
+            <HackerText
+              text="$ LIBERANDO O ACESSO..."
+              speed={15}
+              delay={1000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 6 && (
+            <HackerText
+              text="$ 3... 2... 1..."
+              speed={100}
+              delay={1000}
+              onFinished={() => setHackerIndex(hackerIndex + 1)}
+            />
+          )}
+
+          {hackerIndex >= 7 && (
+            <HackerText
+              text="CONCLUÍDO"
+              speed={5}
+              onFinished={() => showHappyBirthday()}
+            />
+          )}
+
+          {dotVisible && <span>|</span>}
         </section>
       )}
 
