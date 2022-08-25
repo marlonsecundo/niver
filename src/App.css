@@ -85,7 +85,7 @@
 
 @media (min-width: 1800px) {
   .happyMsg {
-    font-size: 11rem;
+    font-size: 9rem;
   }
 }
 
@@ -258,13 +258,13 @@
 
 @media (min-width: 1800px) {
   .bottomText {
-    font-size: 2.5rem;
-    line-height: 3rem;
+    font-size: 2rem;
+    line-height: 2rem;
   }
 
   .happyText {
-    font-size: 2.5rem;
-    line-height: 3rem;
+    font-size: 2rem;
+    line-height: 2rem;
   }
 }
 
