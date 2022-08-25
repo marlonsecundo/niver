@@ -329,6 +329,8 @@ function App() {
 
       {hackerTextVisible && !homeVisible && (
         <section className="hackerText">
+          <p className="areaText">ESTABELECENDO CONEXÃO...</p>
+
           <HackerText
             text="$ AUTENTICANDO REQUISIÇÃO COM O SERVIDOR BASE..."
             speed={15}

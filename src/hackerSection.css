@@ -10,6 +10,11 @@
   flex-direction: column;
 }
 
+.hackerText p {
+  margin-top: -0rem;
+  margin-left: -0rem;
+}
+
 .hackerText span {
   color: white;
   font-size: 2rem;
